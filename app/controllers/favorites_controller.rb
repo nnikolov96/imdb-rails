@@ -4,13 +4,13 @@ class FavoritesController < ApplicationController
   
   def create
     @movie.favorites.create!(user: current_user)
-    redirect_to @movie
+    redirect_to @movie, notice: 'Movie added to favorites'
   end
 
   def destroy
     favorite = current_user.favorites.find(params[:id])
     favorite.destroy
-    redirect_to @movie
+    redirect_to @movie, notice: 'Movie removed from favorites'
   end
 
   private
