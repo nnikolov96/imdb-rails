@@ -4,7 +4,14 @@ class MoviesController < ApplicationController
   before_action :set_movie, only: %i[show edit update destroy]
 
   def index
-    @movies = Movie.released
+    case params[:filter]
+    when "upcoming"
+      @movies = Movie.upcoming
+    when "recent"
+      @movies = Movie.recent
+    else
+      @movies = Movie.released
+    end
   end
 
   def show
