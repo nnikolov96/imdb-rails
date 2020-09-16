@@ -1,0 +1,40 @@
+<section class="user">
+  <h1><%= @user.name %></h1>
+  <h2><%= mail_to(@user.email) %></h2>
+
+
+  <% if current_user?(@user) %>
+    <div class="actions">
+      <%= link_to "Edit Account", edit_user_path(@user), class: "button edit" %>
+    </div>
+  <% end %>
+
+  <% if @user.reviews.present? %>
+    <h3>Reviews</h3>
+    <% @user.reviews.each do |review| %>
+      <div class="review">
+        <div class="details">
+          <span class="title">
+            <%= link_to review.movie.title, review.movie %> <%= pluralize(review.stars, 'star')%>
+          </span>
+          <span class="date">
+            <%= time_ago_in_words(review.created_at) %> ago
+          </span>
+          <p>
+            <%= review.comment %>
+          </p>
+        </div>
+      </div>
+    <% end %>
+  <% end %>
+
+  <% if @user.favorite_movies.present? %>
+    <h3>Favorite Movies</h3>
+    <div class="favorite-movies">
+      <% @user.favorite_movies.each do |movie| %>
+        <%= link_to image_tag(movie.image_file_name), movie %>
+      <% end %>
+    </div>
+  <% end %>
+
+</section>

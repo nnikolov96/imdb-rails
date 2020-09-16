@@ -8,7 +8,9 @@ class Movie < ApplicationRecord
   validates :rating, inclusion: { in: RATINGS }
 
   has_many :reviews, dependent: :destroy
-
+  has_many :favorites, dependent: :destroy
+  has_many :fans, through: :favorites, source: :user
+  
   def flop?
     total_gross.blank? || total_gross < 225_000_000
   end

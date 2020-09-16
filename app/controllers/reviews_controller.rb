@@ -1,4 +1,5 @@
 class ReviewsController < ApplicationController
+  before_action :require_signin
   before_action :set_movie
 
   def index
@@ -27,6 +28,6 @@ class ReviewsController < ApplicationController
   end
 
   def review_params
-    params.require(:review).permit(:comment, :name, :stars)
+    params.require(:review).permit(:comment, :stars).merge(user: current_user)
   end
 end
