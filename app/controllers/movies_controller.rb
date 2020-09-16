@@ -50,11 +50,11 @@ class MoviesController < ApplicationController
   private
 
   def set_movie
-    @movie = Movie.includes(:fans).find(params[:id])
+    @movie = Movie.includes(:fans).includes(:genres).find(params[:id])
   end
 
   def movie_params
-    params.require(:movie).permit(:title, :rating, :released_on, :description, :total_gross, :director, :duration, :image_file_name)
+    params.require(:movie).permit(:title, :rating, :released_on, :description, :total_gross, :director, :duration, :image_file_name, genre_ids: [])
   end
 
   
