@@ -57,7 +57,7 @@ class MoviesController < ApplicationController
   private
 
   def set_movie
-    @movie = Movie.includes(:fans).includes(:genres).find(params[:id])
+    @movie = Movie.includes(:fans).includes(:genres).find_by!(slug: params[:id])
   end
 
   def movie_params
