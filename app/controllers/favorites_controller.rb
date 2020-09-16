@@ -16,6 +16,7 @@ class FavoritesController < ApplicationController
   private
 
   def set_movie
-    @movie = Movie.find_by!(slug: params[:id])
+    byebugparam
+    @movie = Movie.find_by!(slug: params[:movie_id])
   end
 end
