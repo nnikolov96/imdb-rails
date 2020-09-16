@@ -1,10 +1,29 @@
 <header>
   <nav>
-    <%= image_tag("logo") %>
-    <ul>
-      <li>
-        <%= link_to 'Movies', movies_path %>
-      </li>
+    <%= link_to image_tag('logo.png'), root_path %>
+    <ul class="left">
+      <li><%= link_to 'Upcoming Movies', movies_path %></li>
+    </ul>
+    <ul class="right">
+      <% if current_user %>
+        <li>
+          <%= link_to current_user.name, user_path(current_user) %>  
+        </li>
+        <li>
+          <%= link_to "Account Settings", edit_user_path(current_user) %>
+        </li>
+
+        <li>
+          <%= link_to 'Sign out', session_path, method: :delete, class: 'button' %>
+        </li>
+      <% else %>
+        <li>
+          <%= link_to 'Sign Up', signup_path , class:'button'%>
+        </li>
+        <li>
+          <%= link_to 'Sign In', new_session_path , class:'button'%>
+        </li>
+      <% end %>
     </ul>
   </nav>
 </header>

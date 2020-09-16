@@ -1,11 +1,17 @@
 class MoviesController < ApplicationController
+  before_action :require_signin, except: %i[index show]
+  before_action :require_admin, except: %i[index show]
   before_action :set_movie, only: %i[show edit update destroy]
 
   def index
     @movies = Movie.released
   end
 
-  def show; end
+  def show
+    if current_user
+      @favorite = current_user.favorites.find_by(movie_id: @movie.id)
+    end
+  end
 
   def new
     @movie = Movie.new
@@ -44,10 +50,12 @@ class MoviesController < ApplicationController
   private
 
   def set_movie
-    @movie = Movie.find(params[:id])
+    @movie = Movie.includes(:fans).find(params[:id])
   end
 
   def movie_params
     params.require(:movie).permit(:title, :rating, :released_on, :description, :total_gross, :director, :duration, :image_file_name)
   end
+
+  
 end
