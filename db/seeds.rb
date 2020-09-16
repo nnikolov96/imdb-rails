@@ -166,3 +166,15 @@ Movie.create!([
     image_file_name: "wonder-woman.png"
   }
 ])
+User.create!(name: 'Nikola', admin: true, password: 'Test1234#', email: 'nikola@gmail.com')
+
+Genre.create!(name: "Action")
+Genre.create!(name: "Comedy")
+Genre.create!(name: "Drama")
+Genre.create!(name: "Romance")
+Genre.create!(name: "Thriller")
+Genre.create!(name: "Fantasy")
+Genre.create!(name: "Documentary")
+Genre.create!(name: "Adventure")
+Genre.create!(name: "Animation")
+Genre.create!(name: "Sci-Fi")

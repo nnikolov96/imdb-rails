@@ -1,5 +1,6 @@
 Rails.application.routes.draw do
 
+  resources :genres
   resources :users
   get "signup" => "users#new"
   resources :movies do
